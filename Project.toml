@@ -7,10 +7,18 @@ version = "0.1.0"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 Expectations = "2fe49d83-0758-5602-8f54-1f90ad0d522b"
 Polynomials = "f27b6e38-b328-58d1-80ce-0feddd5e7a45"
+SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 Symbolics = "0c5d862f-8b57-4792-8d23-62f2024744c7"
 
 [compat]
 Distributions = "0.25.120"
 Expectations = "1.9.2"
 Polynomials = "4.0.19"
+SpecialFunctions = "2.5.1"
 Symbolics = "6.41.0"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

@@ -1,5 +1,14 @@
 module SymbolicDistributions
 
-greet() = print("Hello World!")
+using Distributions, Symbolics, Polynomials, Expectations, SpecialFunctions
 
-end # module SymbolicDistributions
+import Distributions: moment
+
+include("moments.jl")
+include("linearexpectations.jl")
+
+export 
+    moment
+    linearexpectation
+
+end
