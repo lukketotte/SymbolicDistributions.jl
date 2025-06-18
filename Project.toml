@@ -1,0 +1,16 @@
+name = "SymbolicDistributions"
+uuid = "a27a4db8-d4ed-48e1-8ee3-639f48f77977"
+authors = ["Lukas <lukas.arnroth@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+Expectations = "2fe49d83-0758-5602-8f54-1f90ad0d522b"
+Polynomials = "f27b6e38-b328-58d1-80ce-0feddd5e7a45"
+Symbolics = "0c5d862f-8b57-4792-8d23-62f2024744c7"
+
+[compat]
+Distributions = "0.25.120"
+Expectations = "1.9.2"
+Polynomials = "4.0.19"
+Symbolics = "6.41.0"
