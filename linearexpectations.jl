@@ -1,4 +1,4 @@
-using Distributions, Symbolics, Polynomials, TaylorSeries
+using Distributions, Symbolics, Polynomials, Expectations
 
 function moment(d::Normal, n::Int)
     @variables σ μ x
@@ -22,3 +22,33 @@ function linearexpectation(f::AbstractUnivariatePolynomial, d::Normal)
     end
     return m
 end
+
+function linearexpectation(f::Num, d::Normal)
+    @assert length(Symbolics.get_variables(f)) == 1 "Linear expression of IIDs should only have one variable"
+    @variables x
+    f = substitute(f, first(Symbolics.get_variables(f)) => x)
+    symbols = Symbolics.arguments(Symbolics.value(f))
+    m = 0
+    for s in symbols
+        f = build_function(s, x, expression = Val{false})
+        temp = expectation(x -> f(x), d)
+        (isinf(temp) || isnan(temp)) && @warn("$(s) is not finite")
+        m += temp
+    end
+    return m
+end
+
+function linearexpectation(f::Num, d::Vector{<:ContinuousUnivariateDistribution})
+    n = length(d)
+    @assert length(Symbolics.get_variables(f)) == n "Number of variables ≠ number of distributions"
+    symbols = Symbolics.arguments(Symbolics.value(f))
+    m = 0
+    for (i,s) in enumerate(symbols)
+        f = build_function(s, first(Symbolics.get_variables(s)), expression = Val{false})
+        temp = expectation(x -> f(x), d[i])
+        (isinf(temp) || isnan(temp)) && @warn("E[$(s)] wrt $(d[i]) is not finite")
+        m += temp
+    end
+    return m
+end
+
