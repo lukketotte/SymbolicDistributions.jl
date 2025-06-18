@@ -6,6 +6,7 @@ import Distributions: moment
 
 include("moments.jl")
 include("linearexpectations.jl")
+include("common.jl")
 
 export 
     moment
